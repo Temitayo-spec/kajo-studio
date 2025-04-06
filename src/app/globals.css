@@ -1,26 +1,51 @@
 @import "tailwindcss";
+@layer theme, base, components, utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0e1011;
+  --background-inverse-1: #181a1b;
+  --background-inverse-2: #1f2122;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-inverse-1: var(--background-inverse-1);
+  --color-inverse-2: var(--background-inverse-2);
+  /* --color-foreground: var(--foreground); */
+  --font-anton-sc: var(--font-anton-sc);
+  --font-gambetta: var(--font-gambetta);
+  --font-inter: var(--font-inter);
+  --text-inverse-muted: rgba(255, 255, 255, 0.6);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+span {
+  display: inline-block;
+}
+
+.perspective-container {
+  perspective: 1000px;
+  perspective-origin: center;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.perspective-section {
+  perspective: 1000px;
+  perspective-origin: center;
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.transform-container {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }

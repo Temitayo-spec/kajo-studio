@@ -13,3 +13,11 @@ interface IServices {
   };
   image: StaticImageData;
 }
+
+interface ITestimonials {
+  testimonial: string;
+  extra_comment: string;
+  avatar: StaticImageData;
+  name: string;
+  company: string;
+}

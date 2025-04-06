@@ -2,6 +2,7 @@
 import HeroSection from "./hero-section";
 import Projects from "./projects";
 import Services from "./services";
+import Testimonials from "./testimonials";
 
 const HomeInject = () => {
   return (
@@ -9,6 +10,7 @@ const HomeInject = () => {
       <HeroSection />
       <Projects />
       <Services />
+      <Testimonials />
     </main>
   );
 };

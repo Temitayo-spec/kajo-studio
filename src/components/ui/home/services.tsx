@@ -96,15 +96,15 @@ const ServiceCard: FC<
 > = ({ description, details, image, position, title }) => {
   return (
     <article
-      className={`bg-inverse-1 flex ${
+      className={`bg-inverse-1 flex h-screen ${
         position === "left" ? "flex-row-reverse" : "flex-row"
       }`}
     >
-      <div className="w-[40%]">
+      <div className="w-[40%] h-full">
         <Image
           src={image}
           alt={title[0] + title[1]}
-          className="object-conatin"
+          className="object-cover"
         />
       </div>
       <div className="w-[60%] p-[6rem] flex flex-col justify-between">

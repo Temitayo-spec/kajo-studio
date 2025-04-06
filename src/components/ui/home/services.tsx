@@ -2,6 +2,8 @@
 import { useRef, useLayoutEffect, FC } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { SERVICES } from "@/constants/projects";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,9 +76,56 @@ const Services = () => {
             </p>
           </div>
         </header>
+
+        <div>
+          {SERVICES.map((s, i) => (
+            <ServiceCard key={i} {...s} position={i === 1 ? "left" : "right"} />
+          ))}
+        </div>
       </main>
     </section>
   );
 };
 
 export default Services;
+
+const ServiceCard: FC<
+  IServices & {
+    position: string;
+  }
+> = ({ description, details, image, position, title }) => {
+  return (
+    <article
+      className={`bg-inverse-1 flex ${
+        position === "left" ? "flex-row-reverse" : "flex-row"
+      }`}
+    >
+      <div className="w-[40%]">
+        <Image
+          src={image}
+          alt={title[0] + title[1]}
+          className="object-conatin"
+        />
+      </div>
+      <div className="w-[60%] p-[6rem] flex flex-col justify-between">
+        <div className="space-y-4">
+          <h2 className="font-anton-sc uppercase flex flex-col leading-[100%] text-[6rem]">
+            {title.map((t, i) => (
+              <span key={i}>{t}</span>
+            ))}
+          </h2>
+          <p className="font-semibold text-[2rem] tracking-[-0.0625rem] leading-[140%]">{description}</p>
+        </div>
+
+        <div className="space-y-6">
+          <h4 className="text-2xl text-white/60 font-gambetta">({details.title})</h4>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+            {details.services.map((service, i) => (
+              <p key={i} className="text-2xl font-semibold leading-[130%]">{service}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};

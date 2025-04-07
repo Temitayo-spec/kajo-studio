@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { TextReveal } from "@/components/common/text-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,8 +17,8 @@ const HeroSection = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+
       // Image parallax effect
       gsap.to(imageRef.current, {
         objectPosition: "85% center",
@@ -51,7 +52,6 @@ const HeroSection = () => {
           scrub: true,
         },
       });
-      
     }, containerRef);
 
     return () => ctx.revert();
@@ -62,10 +62,7 @@ const HeroSection = () => {
       ref={containerRef}
       className="max-w-[1440px] mx-auto flex min-h-screen relative"
     >
-      <div 
-        ref={leftSideRef} 
-        className="h-screen w-1/2 sticky top-0"
-      >
+      <div ref={leftSideRef} className="h-screen w-1/2 sticky top-0">
         <div className="relative h-full">
           <Image
             ref={imageRef}
@@ -79,24 +76,65 @@ const HeroSection = () => {
           />
         </div>
       </div>
-      
+
       <div className="w-1/2 flex-1">
         <div ref={contentRef} className="transform-container">
           <Navbar />
 
           <div className="px-[4.5rem] pt-[4.37rem] pb-12">
-            <h1 className="font-anton-sc text-[10rem] uppercase flex flex-col leading-[100%]">
-              <span>©kajo</span>
-              <span>studio</span>
-            </h1>
+            <div className="font-anton-sc text-[10rem] uppercase flex flex-col leading-[100%]">
+              <TextReveal
+                splitType="chars"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                ©kajo
+              </TextReveal>
 
-            <p className="text-4xl mt-40 -tracking-[0.02345rem] leading-[130%] font-semibold">
-              Crafting impactful brands and websites that drive growth and
-              success.
-            </p>
+              <TextReveal
+                splitType="chars"
+                direction="up"
+                duration={0.7}
+                delay={0.2}
+                stagger={0.08}
+              >
+                studio
+              </TextReveal>
+            </div>
+
+            <div className="text-4xl mt-32 -tracking-[0.02345rem] leading-[130%] font-semibold">
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+                delay={1.2}
+              >
+                Crafting impactful brands and
+              </TextReveal>
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                delay={1.4}
+                stagger={0.08}
+              >
+                websites that drive growth and
+              </TextReveal>
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                delay={1.6}
+                stagger={0.08}
+              >
+                success.
+              </TextReveal>
+            </div>
           </div>
 
-          <div className="px-[4.5rem] pt-[4.5rem] pb-[6rem] space-y-[8rem]">
+          <div className="px-[6rem] pt-[4.5rem] pb-[6rem] space-y-[8rem]">
             <div>
               <span className="font-gambetta leading-[100%] text-2xl mb-6">
                 (About Us)

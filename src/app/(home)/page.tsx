@@ -1,4 +1,4 @@
-import { HeroSection, HomeInject } from "@/components";
+import { HomeInject } from "@/components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

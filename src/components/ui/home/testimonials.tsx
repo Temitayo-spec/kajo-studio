@@ -2,7 +2,6 @@
 import { useRef, useLayoutEffect, FC } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { SERVICES } from "@/constants/projects";
 import Image from "next/image";
 import { TESTIMONIALS } from "@/constants/testimonials";
 

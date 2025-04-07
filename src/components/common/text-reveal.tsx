@@ -190,7 +190,7 @@ interface TextRevealProps {
 
 const TextReveal: React.FC<TextRevealProps> = ({
   children,
-  as: Component = "div",
+  as: Component = "span",
   className = "",
   direction = "up",
   duration = 0.5,
@@ -204,7 +204,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
     const initialProps = {
       y: direction === "up" ? "100%" : direction === "down" ? "-100%" : "0%",
       x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-      opacity: 1, // Set to 1 since we're using overflow hidden instead of opacity
+      opacity: 1,
     };
 
     return {
@@ -248,14 +248,14 @@ const TextReveal: React.FC<TextRevealProps> = ({
     // Split based on type
     if (splitType === "chars") {
       return (
-        <motion.div
+        <motion.span
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
           aria-label={children}
         >
           {children.split("").map((char, i) => (
-            <div key={`char-container-${i}`} className="inline-block overflow-hidden">
+            <span key={`char-container-${i}`} className="inline-block overflow-hidden">
               <motion.span
                 key={`char-${i}`}
                 className="inline-block"
@@ -264,15 +264,15 @@ const TextReveal: React.FC<TextRevealProps> = ({
               >
                 {char === " " ? "\u00A0" : char}
               </motion.span>
-            </div>
+            </span>
           ))}
-        </motion.div>
+        </motion.span>
       );
     }
 
     if (splitType === "words") {
       return (
-        <motion.div
+        <motion.span
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
@@ -280,7 +280,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
           className="flex flex-wrap"
         >
           {children.split(" ").map((word, i) => (
-            <div key={`word-container-${i}`} className="overflow-hidden mr-[0.25em] mb-1">
+            <span key={`word-container-${i}`} className="overflow-hidden mr-[0.25em] mb-1">
               <motion.span
                 key={`word-${i}`}
                 className="inline-block"
@@ -289,33 +289,33 @@ const TextReveal: React.FC<TextRevealProps> = ({
               >
                 {word}
               </motion.span>
-            </div>
+            </span>
           ))}
-        </motion.div>
+        </motion.span>
       );
     }
 
     if (splitType === "lines") {
       return (
-        <motion.div
+        <motion.span
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
           aria-label={children}
         >
           {children.split("\n").map((line, i) => (
-            <div key={`line-container-${i}`} className="block overflow-hidden">
-              <motion.div
+            <span key={`line-container-${i}`} className="block overflow-hidden">
+              <motion.span
                 key={`line-${i}`}
                 className="block"
                 variants={getVariants()}
                 custom={i}
               >
                 {line}
-              </motion.div>
-            </div>
+              </motion.span>
+            </span>
           ))}
-        </motion.div>
+        </motion.span>
       );
     }
 

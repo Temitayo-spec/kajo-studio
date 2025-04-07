@@ -4,6 +4,8 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { SERVICES } from "@/constants/projects";
 import Image from "next/image";
+import { TextReveal } from "@/components/common/text-reveal";
+import { DiagonalReveal } from "@/components/common/image-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -61,25 +63,68 @@ const Services = () => {
       <main ref={contentRef} className="transform-container">
         <header className="w-[90%] mx-auto max-w-[1440px] py-[6rem] space-y-[6rem]">
           <div className="flex items-center justify-between">
-            <p className="font-gambetta text-2xl text-white/60">(What we do)</p>
-            <p className="font-gambetta text-2xl text-white/60">(02)</p>
+            <p className="font-gambetta text-2xl text-white/60">
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                (What we do)
+              </TextReveal>
+            </p>
+            <p className="font-gambetta text-2xl text-white/60">
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                (02)
+              </TextReveal>
+            </p>
           </div>
 
           <div>
             <h2 className="text-[15rem] font-anton-sc uppercase leading-[100%]">
-              Services
+              <TextReveal
+                splitType="chars"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                Services
+              </TextReveal>
             </h2>
             <p className="text-[3.75rem] font-semibold leading-[120%] tracking-[-0.125rem]">
-              <span>Discover our tailored services</span>
-              <span>designed to elevate your brand,</span>
-              <span>enhance user experience.</span>
+              {[
+                "Discover our tailored services",
+                "designed to elevate your brand,",
+                "enhance user experience.",
+              ].map((lines, i) => (
+                <TextReveal
+                  splitType="lines"
+                  direction="up"
+                  duration={0.7}
+                  stagger={0.08}
+                  delay={i === 0 ? 0.05 : i * 0.1}
+                  key={i}
+                >
+                  {lines}
+                </TextReveal>
+              ))}
             </p>
           </div>
         </header>
 
         <div>
           {SERVICES.map((s, i) => (
-            <ServiceCard key={i} {...s} position={i === 1 ? "left" : "right"} />
+            <ServiceCard
+              key={i}
+              {...s}
+              position={i === 1 ? "left" : "right"}
+              index={i}
+            />
           ))}
         </div>
       </main>
@@ -92,8 +137,9 @@ export default Services;
 const ServiceCard: FC<
   IServices & {
     position: string;
+    index: number;
   }
-> = ({ description, details, image, position, title }) => {
+> = ({ description, details, image, position, title, index }) => {
   return (
     <article
       className={`bg-inverse-1 flex h-screen ${
@@ -101,27 +147,70 @@ const ServiceCard: FC<
       }`}
     >
       <div className="w-[40%] h-full">
-        <Image
-          src={image}
-          alt={title[0] + title[1]}
-          className="object-cover"
-        />
+        <DiagonalReveal className="" duration={2} delay={index * 0.1}>
+          <Image
+            src={image}
+            alt={title[0] + title[1]}
+            className="object-cover"
+          />
+        </DiagonalReveal>
       </div>
       <div className="w-[60%] p-[6rem] flex flex-col justify-between">
         <div className="space-y-4">
           <h2 className="font-anton-sc uppercase flex flex-col leading-[100%] text-[6rem]">
             {title.map((t, i) => (
-              <span key={i}>{t}</span>
+              <TextReveal
+                splitType="chars"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+                key={i}
+                delay={i * 0.1}
+              >
+                {t}
+              </TextReveal>
             ))}
           </h2>
-          <p className="font-semibold text-[2rem] tracking-[-0.0625rem] leading-[140%]">{description}</p>
+          <p className="font-semibold text-[2rem] tracking-[-0.0625rem] leading-[140%]">
+            <TextReveal
+              splitType="lines"
+              direction="up"
+              duration={0.7}
+              stagger={0.08}
+              delay={0.4}
+            >
+              {description}
+            </TextReveal>
+          </p>
         </div>
 
         <div className="space-y-6">
-          <h4 className="text-2xl text-white/60 font-gambetta">({details.title})</h4>
+          <h4 className="text-2xl text-white/60 font-gambetta">
+            <TextReveal
+              key={`details-title-${details.title}`}
+              splitType="lines"
+              direction="up"
+              duration={0.7}
+              stagger={0.08}
+              delay={0.6}
+            >
+              {`(${details.title})`}
+            </TextReveal>
+          </h4>
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
             {details.services.map((service, i) => (
-              <p key={i} className="text-2xl font-semibold leading-[130%]">{service}</p>
+              <p key={i} className="text-2xl font-semibold leading-[130%]">
+                <TextReveal
+                  splitType="lines"
+                  direction="up"
+                  duration={0.7}
+                  stagger={0.08}
+                  key={i}
+                  delay={i * 0.2}
+                >
+                  {service}
+                </TextReveal>
+              </p>
             ))}
           </div>
         </div>

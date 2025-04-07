@@ -4,6 +4,9 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/constants/projects";
 import Image from "next/image";
+import { TextReveal } from "@/components/common/text-reveal";
+import { motion } from "framer-motion";
+import { DiagonalReveal } from "@/components/common/image-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,26 +65,65 @@ const Projects = () => {
         <header className="w-[90%] mx-auto max-w-[1440px] py-[6rem] space-y-[6rem]">
           <div className="flex items-center justify-between">
             <p className="font-gambetta text-2xl text-white/60">
-              (Selected Work)
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                (Selected Work)
+              </TextReveal>
             </p>
-            <p className="font-gambetta text-2xl text-white/60">(01)</p>
+            <p className="font-gambetta text-2xl text-white/60">
+              <TextReveal
+                splitType="lines"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                (01)
+              </TextReveal>
+            </p>
           </div>
 
           <div>
-            <h2 className="text-[15rem] font-anton-sc uppercase leading-[100%]">
-              Projects
-            </h2>
+            <div className="text-[15rem] font-anton-sc uppercase leading-[100%]">
+              <TextReveal
+                splitType="chars"
+                direction="up"
+                duration={0.7}
+                stagger={0.08}
+              >
+                Projects
+              </TextReveal>
+            </div>
             <p className="text-[3.75rem] font-semibold leading-[120%] tracking-[-0.125rem]">
-              <span>Explore our recent projects</span>
+              {[
+                "Explore our recent projects",
+                "showcasing creativity, innovation,",
+                "and impactful design solutions.",
+              ].map((lines, i) => (
+                <TextReveal
+                  splitType="lines"
+                  direction="up"
+                  duration={0.7}
+                  stagger={0.08}
+                  delay={i * 0.05}
+                  key={i}
+                >
+                  {lines}
+                </TextReveal>
+              ))}
+              {/* <span>Explore our recent projects</span>
               <span>showcasing creativity, innovation,</span>
-              <span>and impactful design solutions.</span>
+              <span>and impactful design solutions.</span> */}
             </p>
           </div>
         </header>
 
         <div className="grid grid-cols-2 max-w-[1440px] mx-auto">
           {PROJECTS.map((project, index) => {
-            return <ProjectCard key={index} {...project} />;
+            return <ProjectCard key={index} {...project} index={index} />;
           })}
         </div>
       </main>
@@ -91,19 +133,38 @@ const Projects = () => {
 
 export default Projects;
 
-const ProjectCard: FC<IProjects> = ({ image, name, year }) => {
+const ProjectCard: FC<ProjectCardProps> = ({ image, name, year, index }) => {
   return (
     <article>
-      <div>
-        <Image src={image} alt={name} className="object-contain" />
-      </div>
+      <DiagonalReveal className="" duration={2} delay={index * 0.1}>
+        <Image
+          src={image}
+          alt={name}
+          className="object-contain w-full h-auto"
+        />
+      </DiagonalReveal>
 
       <div className="p-8 flex items-center justify-between">
         <h4 className="text-[1.875rem] font-semibold leading-[140%] tracking-[-0.0625rem]">
-          {name}
+          <TextReveal
+            splitType="chars"
+            direction="up"
+            duration={0.7}
+            stagger={0.08}
+          >
+            {name}
+          </TextReveal>
         </h4>
         <p className="font-gambetta text-2xl text-white/60 leading-[100%]">
-          ({year})
+          <TextReveal
+            splitType="chars"
+            direction="up"
+            duration={0.7}
+            stagger={0.08}
+            delay={0.2}
+          >
+            {year}
+          </TextReveal>
         </p>
       </div>
     </article>

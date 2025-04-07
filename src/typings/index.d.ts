@@ -21,3 +21,7 @@ interface ITestimonials {
   name: string;
   company: string;
 }
+
+interface ProjectCardProps extends IProjects {
+  index: number;
+}

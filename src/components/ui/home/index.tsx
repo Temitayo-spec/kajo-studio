@@ -1,4 +1,5 @@
 "use client";
+import Footer from "./footer";
 import HeroSection from "./hero-section";
 import Projects from "./projects";
 import Services from "./services";
@@ -11,6 +12,7 @@ const HomeInject = () => {
       <Projects />
       <Services />
       <Testimonials />
+      <Footer />
     </main>
   );
 };

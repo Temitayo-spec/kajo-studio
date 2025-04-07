@@ -11,6 +11,7 @@
   --color-background: var(--background);
   --color-inverse-1: var(--background-inverse-1);
   --color-inverse-2: var(--background-inverse-2);
+  --color-footer-links: #0E101199;
   /* --color-foreground: var(--foreground); */
   --font-anton-sc: var(--font-anton-sc);
   --font-gambetta: var(--font-gambetta);

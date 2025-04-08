@@ -1,11 +1,12 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useContext } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TESTIMONIALS } from "@/constants/testimonials";
 import { TextReveal } from "@/components/common/text-reveal";
 import { FallingCard } from "./falling-card";
 import { useScroll } from "framer-motion";
+import { LoadingContext } from "@/components/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,47 +20,60 @@ const Testimonials = () => {
     offset: ["start end", "end start"],
   });
 
+  const { isLoading, animationComplete } = useContext(LoadingContext);
+
   useEffect(() => {
+    if (!isLoading && animationComplete) {
+      initializeGSAP();
+    }
+  }, [isLoading, animationComplete]);
+
+  const initializeGSAP = () => {
     const ctx = gsap.context(() => {
-      gsap.to(contentRef.current, {
-        rotateX: "0deg",
-        scale: 1,
-        opacity: 1,
-        y: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "top center",
-          scrub: true,
-        },
-      });
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ScrollTrigger.refresh();
 
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "bottom bottom-=300",
-        end: "bottom top-=300",
-        pin: true,
-        pinSpacing: false,
-      });
+      setTimeout(() => {
+        gsap.to(contentRef.current, {
+          rotateX: "0deg",
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: true,
+          },
+        });
 
-      gsap.to(sectionRef.current, {
-        rotateX: "12deg",
-        scale: 0.92,
-        opacity: 0.8,
-        transformOrigin: "center bottom",
-        ease: "power2.inOut",
-        scrollTrigger: {
+        ScrollTrigger.create({
           trigger: sectionRef.current,
           start: "bottom bottom-=300",
-          end: "bottom bottom-=500",
-          scrub: true,
-        },
-      });
+          end: "bottom top-=300",
+          pin: true,
+          pinSpacing: false,
+        });
+
+        gsap.to(sectionRef.current, {
+          rotateX: "12deg",
+          scale: 0.92,
+          opacity: 0.8,
+          transformOrigin: "center bottom",
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "bottom bottom-=300",
+            end: "bottom bottom-=500",
+            scrub: true,
+          },
+        });
+      }, 100);
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  };
 
   return (
     <section

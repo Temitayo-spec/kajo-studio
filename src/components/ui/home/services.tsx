@@ -1,23 +1,72 @@
 "use client";
-import { useRef, FC, RefObject } from "react";
+import { useRef, FC, useContext, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { SERVICES } from "@/constants/projects";
 import Image from "next/image";
 import { TextReveal } from "@/components/common/text-reveal";
 import { DiagonalReveal } from "@/components/common/image-reveal";
-import { useGSAPInit } from "@/hooks/useGsapInit";
+import { LoadingContext } from "@/components/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef(null);
+  const contentRef = useRef(null);
+  const { isLoading, animationComplete } = useContext(LoadingContext);
 
-  useGSAPInit(
-    sectionRef as RefObject<HTMLElement>,
-    contentRef as RefObject<HTMLElement>
-  );
+  useEffect(() => {
+    if (!isLoading && animationComplete) {
+      initializeGSAP();
+    }
+  }, [isLoading, animationComplete]);
+
+  const initializeGSAP = () => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ScrollTrigger.refresh();
+
+      setTimeout(() => {
+        gsap.to(contentRef.current, {
+          rotateX: "0deg",
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top center",
+            scrub: true,
+          },
+        });
+
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "bottom bottom-=300",
+          end: "bottom top-=300",
+          pin: true,
+          pinSpacing: false,
+        });
+
+        gsap.to(sectionRef.current, {
+          rotateX: "12deg",
+          scale: 0.92,
+          opacity: 0.8,
+          transformOrigin: "center bottom",
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "bottom bottom-=300",
+            end: "bottom bottom-=500",
+            scrub: true,
+          },
+        });
+      }, 100);
+    }, sectionRef);
+
+    return () => ctx.revert();
+  };
 
   return (
     <section

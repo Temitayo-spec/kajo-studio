@@ -1,7 +1,7 @@
 "use client";
 import { COMPANIES, hero_banner } from "@/constants/images";
 import Image from "next/image";
-import { RefObject, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TextReveal } from "@/components/common/text-reveal";
@@ -10,19 +10,29 @@ import {
   SmallerImageBottomUpReveal,
 } from "@/components/common/image-reveal";
 import { FlipLink } from "@/components/common/flip-link";
-import { useGSAPInit } from "@/hooks/useGsapInit";
+import { LoadingContext } from "@/components/layout";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const leftSideRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef(null);
+  const leftSideRef = useRef(null);
+  const imageRef = useRef(null);
+  const contentRef = useRef(null);
+  const { isLoading, animationComplete } = useContext(LoadingContext);
 
-  const customAnimations = [
-    () => {
-      if (imageRef.current && containerRef.current) {
+  useEffect(() => {
+    if (!isLoading && animationComplete) {
+      initializeGSAP();
+    }
+  }, [isLoading, animationComplete]);
+
+  const initializeGSAP = () => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.getAll().forEach((st) => st.kill());
+      ScrollTrigger.refresh();
+
+      setTimeout(() => {
         gsap.to(imageRef.current, {
           objectPosition: "85% center",
           ease: "none",
@@ -33,15 +43,34 @@ const HeroSection = () => {
             scrub: true,
           },
         });
-      }
-    },
-  ];
 
-  useGSAPInit(
-    containerRef as RefObject<HTMLElement>,
-    contentRef as RefObject<HTMLElement>,
-    customAnimations
-  );
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "bottom bottom-=300",
+          end: "bottom top-=300",
+          pin: true,
+          pinSpacing: false,
+          id: "hero-pin",
+        });
+
+        gsap.to(containerRef.current, {
+          rotateX: "12deg",
+          scale: 0.92,
+          opacity: 0.8,
+          transformOrigin: "center bottom",
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "bottom bottom-=300",
+            end: "bottom bottom-=500",
+            scrub: true,
+          },
+        });
+      }, 100);
+    }, containerRef);
+
+    return () => ctx.revert();
+  };
 
   return (
     <section

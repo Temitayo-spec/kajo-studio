@@ -1,14 +1,11 @@
 "use client";
 import { COMPANIES, hero_banner } from "@/constants/images";
 import Image from "next/image";
-import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TextReveal } from "@/components/common/text-reveal";
 import {
-  BottomUpReveal,
-  ClipPathReveal,
   DiagonalReveal,
   SmallerImageBottomUpReveal,
 } from "@/components/common/image-reveal";
@@ -305,7 +302,7 @@ const Navbar = () => {
       </ul>
 
       <li className="leading-[100%] font-semibold font-base">
-        <FlipLink href="#">Let's Talk</FlipLink>
+        <FlipLink href="#">Let&apos;s Talk</FlipLink>
       </li>
     </nav>
   );

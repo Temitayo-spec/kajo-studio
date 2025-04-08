@@ -1,8 +1,7 @@
 "use client";
-import { useRef, useLayoutEffect, FC } from "react";
+import { useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { TESTIMONIALS } from "@/constants/testimonials";
 import { TextReveal } from "@/components/common/text-reveal";
 import { FallingCard } from "./falling-card";
@@ -129,13 +128,13 @@ const Testimonials = () => {
 
         <div className="grid grid-cols-3" ref={testimonialRef}>
           {TESTIMONIALS.map((t, i) => (
-           <FallingCard
-           key={i}
-           index={i}
-           scrollYProgress={scrollYProgress}
-           {...t}
-           background={i % 2 !== 0}
-         />
+            <FallingCard
+              key={i}
+              index={i}
+              scrollYProgress={scrollYProgress}
+              {...t}
+              background={i % 2 !== 0}
+            />
           ))}
         </div>
       </main>
@@ -144,4 +143,3 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
-

@@ -5,7 +5,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { PROJECTS } from "@/constants/projects";
 import Image from "next/image";
 import { TextReveal } from "@/components/common/text-reveal";
-import { motion } from "framer-motion";
 import { DiagonalReveal } from "@/components/common/image-reveal";
 
 gsap.registerPlugin(ScrollTrigger);

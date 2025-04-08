@@ -79,6 +79,8 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       const d2 = animateDigit(digit2Ref.current as unknown as HTMLElement, 6);
       const d3 = animateDigit(digit3Ref.current as unknown as HTMLElement, 5);
 
+      console.log(d1, d2, d3);
+
       gsap.delayedCall(totalDuration + 0.5, () => {
         const tl = gsap.timeline();
 

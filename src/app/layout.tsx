@@ -1,5 +1,4 @@
-import type { Metadata } from "next";
-import { Inter, Anton_SC, Poppins, Montserrat } from "next/font/google";
+import { Anton_SC, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Layout from "@/components/layout";
@@ -25,8 +24,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
-
-
 
 export default function RootLayout({
   children,

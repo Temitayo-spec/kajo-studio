@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TESTIMONIALS } from "@/constants/testimonials";
@@ -19,7 +19,7 @@ const Testimonials = () => {
     offset: ["start end", "end start"],
   });
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(contentRef.current, {
         rotateX: "0deg",

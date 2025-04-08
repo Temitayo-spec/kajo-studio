@@ -1,7 +1,7 @@
 "use client";
 import { COMPANIES, hero_banner } from "@/constants/images";
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TextReveal } from "@/components/common/text-reveal";
@@ -19,7 +19,7 @@ const HeroSection = () => {
   const imageRef = useRef(null);
   const contentRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
 

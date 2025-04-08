@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useLayoutEffect, FC } from "react";
+import { useRef, useEffect, FC } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { SERVICES } from "@/constants/projects";
@@ -13,7 +13,7 @@ const Services = () => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(contentRef.current, {
         rotateX: "0deg",

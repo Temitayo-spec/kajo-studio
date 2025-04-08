@@ -197,7 +197,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
   delay = 0,
   stagger = 0.05,
   splitType = "words",
-  viewport = { once: true, margin: "-100px 0px" },
+  viewport = { once: true, margin: "-10% 0px" },
 }) => {
   // Get animation variants based on direction
   const getVariants = (): Variants => {

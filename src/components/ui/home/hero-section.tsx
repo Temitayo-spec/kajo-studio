@@ -68,7 +68,7 @@ const HeroSection = () => {
       className="max-w-[1440px] mx-auto flex min-h-screen relative"
     >
       <div ref={leftSideRef} className="h-screen w-1/2 sticky top-0">
-        <DiagonalReveal className="h-full" delay={2} duration={2.5}>
+        <DiagonalReveal className="h-full" delay={1.5} duration={2}>
           <div className="relative h-full">
             <Image
               ref={imageRef}

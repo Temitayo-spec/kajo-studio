@@ -4,7 +4,12 @@ import project_acme from "../../public/images/project_acme.png";
 import project_goldline from "../../public/images/project_goldline.png";
 import project_kanba from "../../public/images/project_kanba.png";
 import project_utosia from "../../public/images/project_utosia.png";
-export const PROJECTS_IMAGES = [project_acme, project_goldline, project_kanba, project_utosia];
+export const PROJECTS_IMAGES = [
+  project_acme,
+  project_goldline,
+  project_kanba,
+  project_utosia,
+];
 
 import brand_strategy from "../../public/images/brand_strategy.png";
 import website_design from "../../public/images/website_design.png";
@@ -24,4 +29,13 @@ import ic_utosia from "../../public/svgs/ic_utosia.svg";
 
 export { acme, asgardia, circle, ic_goldline, ic_kanba, ic_utosia };
 
-export const COMPANIES = [acme, asgardia, circle, ic_goldline, ic_kanba, ic_utosia];
+export const COMPANIES = [
+  acme,
+  asgardia,
+  circle,
+  ic_goldline,
+  ic_kanba,
+  ic_utosia,
+];
+
+export const PRELOADER_IMAGES = [hero_banner, ...SERVICES_IMAGES];

@@ -20,7 +20,6 @@ const HeroSection = () => {
   const imageRef = useRef<HTMLImageElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Custom animations specific to this section
   const customAnimations = [
     () => {
       if (imageRef.current && containerRef.current) {
@@ -38,7 +37,6 @@ const HeroSection = () => {
     },
   ];
 
-  // Use our custom hook with explicit type
   useGSAPInit(
     containerRef as RefObject<HTMLElement>,
     contentRef as RefObject<HTMLElement>,

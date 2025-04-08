@@ -313,8 +313,8 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <li className="leading-[100%] font-semibold font-base">
-        <FlipLink href="#">Lets Talk</FlipLink>
+      <li className="leading-[100%] font-semibold font-base list-none">
+        <FlipLink href="#">Contact</FlipLink>
       </li>
     </nav>
   );

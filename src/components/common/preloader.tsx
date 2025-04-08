@@ -66,7 +66,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
             duration: totalDuration / PRELOADER_IMAGES.length,
             delay: imageDelay,
-            ease: "power2.inOut",
+            ease: "power3.inOut",
           }
         );
       });
@@ -90,7 +90,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
             duration: 1,
             stagger: 0.05,
-            ease: "power2.inOut",
+            ease: "power3.inOut",
           },
           0
         );
@@ -101,6 +101,11 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             clipPath: "inset(100% 0% 0% 0%)",
             duration: 1,
             ease: "power2.inOut",
+            onComplete: () => {
+              setTimeout(() => {
+                onComplete();
+              }, 500);
+            },
           },
           0
         );
@@ -109,11 +114,10 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           scale: 0.8,
           opacity: 0,
           duration: 0.8,
-          ease: "power2.inOut",
+          ease: "power3.inOut",
           onComplete: () => {
             const el = document.querySelector(".preloader-container");
             if (el) el.remove();
-            onComplete();
           },
         });
       });
@@ -146,9 +150,9 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   }, []);
 
   return (
-    <div className="preloader-container flex items-center justify-center w-full h-screen bg-black text-white font-anton-sc uppercase fixed overflow-hidden">
+    <div className="preloader-container flex items-center justify-center w-full h-screen bg-black text-white font-anton-sc uppercase fixed overflow-hidden z-[999999]">
       <div className="relative flex items-center justify-center w-full h-full">
-        <div className="relative overflow-hidden h-100 w-100">
+        <div className="relative overflow-hidden h-[500px] w-100">
           {PRELOADER_IMAGES.map((image, index) => (
             <Image
               key={index}

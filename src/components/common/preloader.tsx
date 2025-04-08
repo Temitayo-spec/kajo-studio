@@ -17,14 +17,14 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
         for (let j = 0; j < 10; j++) {
           const div = document.createElement("div");
           div.className =
-            "num flex items-center justify-center h-32 md:h-40 text-6xl md:text-8xl";
+            "num flex items-center justify-center h-32 md:h-40 text-6xl";
           div.textContent = j.toString();
           digit3.appendChild(div);
         }
       }
       const finalDigit = document.createElement("div");
       finalDigit.className =
-        "num flex items-center justify-center h-32 md:h-40 text-6xl md:text-8xl";
+        "num flex items-center justify-center h-32 md:h-40 text-6xl";
       finalDigit.textContent = "0";
       digit3.appendChild(finalDigit);
     }
@@ -170,34 +170,34 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
         </div>
         <div className="absolute bottom-6 right-6 flex flex-col items-center justify-center z-10">
           <div className="flex items-center justify-center">
-            <div className="relative h-32 w-16 md:h-40 overflow-hidden">
+            <div className="relative h-32 w-10 md:h-40 overflow-hidden">
               <div ref={digit1Ref} className="absolute w-full digit-1">
                 {[0, 1].map((digit) => (
                   <div
                     key={digit}
-                    className="flex items-center justify-center h-32 md:h-40 text-6xl md:text-8xl num"
+                    className="flex items-center justify-center h-32 md:h-40 text-6xl num"
                   >
                     {digit}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative h-32 w-16 md:h-40 overflow-hidden">
+            <div className="relative h-32 w-10 md:h-40 overflow-hidden">
               <div ref={digit2Ref} className="absolute w-full digit-2">
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((digit, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-center h-32 md:h-40 text-6xl md:text-8xl num"
+                    className="flex items-center justify-center h-32 md:h-40 text-6xl num"
                   >
                     {digit}
                   </div>
                 ))}
               </div>
             </div>
-            <div className="relative h-32 w-16 md:h-40 overflow-hidden">
+            <div className="relative h-32 w-10 md:h-40 overflow-hidden">
               <div ref={digit3Ref} className="absolute w-full digit-3" />
             </div>
-            <div className="text-6xl md:text-8xl">%</div>
+            <div className="text-6xl">%</div>
           </div>
         </div>
       </div>

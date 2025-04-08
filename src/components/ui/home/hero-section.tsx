@@ -302,7 +302,7 @@ const Navbar = () => {
       </ul>
 
       <li className="leading-[100%] font-semibold font-base">
-        <FlipLink href="#">Let&apos;s Talk</FlipLink>
+        <FlipLink href="#">Let's Talk</FlipLink>
       </li>
     </nav>
   );

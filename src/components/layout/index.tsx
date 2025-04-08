@@ -3,7 +3,7 @@ import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { FC, ReactNode, useState, createContext } from "react";
 import { Preloader } from "../common/preloader";
-import { AnimatePresence, delay, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const LoadingContext = createContext({
   isLoading: true,

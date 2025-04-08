@@ -16,13 +16,13 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
 
   const contentVariants = {
     hidden: {
-      y: "100%",
+      y: 50,
     },
     visible: {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: [0.87, 0, 0.13, 1],
         onComplete: () => setAnimationComplete(true)
       },
     },

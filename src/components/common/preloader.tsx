@@ -99,6 +99,9 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             clipPath: "inset(100% 0% 0% 0%)",
             duration: 1,
             ease: "power2.inOut",
+            onComplete: () => {
+              onComplete();
+            },
           },
           0
         );
@@ -111,8 +114,6 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           onComplete: () => {
             const el = document.querySelector(".preloader-container");
             if (el) el.remove();
-
-            onComplete();
           },
         });
       });
@@ -147,24 +148,24 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <div className="preloader-container flex items-center justify-center w-full h-screen bg-black text-white font-anton-sc uppercase relative overflow-hidden">
       <div className="relative flex items-center justify-center w-full h-full">
-        {PRELOADER_IMAGES.map((image, index) => (
-          <Image
-            key={index}
-            ref={(el) => {
-              imagesRef.current[index] = el;
-            }}
-            src={image}
-            alt={`Preloader Image ${index}`}
-            priority
-            quality={100}
-            width={256}
-            height={256}
-            className="object-cover absolute"
-            style={{
-              clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-            }}
-          />
-        ))}
+        <div className="relative overflow-hidden h-100 w-100">
+          {PRELOADER_IMAGES.map((image, index) => (
+            <Image
+              key={index}
+              ref={(el) => {
+                imagesRef.current[index] = el;
+              }}
+              src={image}
+              alt={`Preloader Image ${index}`}
+              priority
+              quality={100}
+              className="object-cover absolute w-full h-full"
+              style={{
+                clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+              }}
+            />
+          ))}
+        </div>
         <div className="absolute bottom-6 right-6 flex flex-col items-center justify-center z-10">
           <div className="flex items-center justify-center">
             <div className="relative h-32 w-16 md:h-40 overflow-hidden">

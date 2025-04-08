@@ -12,6 +12,7 @@ import {
   DiagonalReveal,
   SmallerImageBottomUpReveal,
 } from "@/components/common/image-reveal";
+import { FlipLink } from "@/components/common/flip-link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -289,31 +290,23 @@ const Navbar = () => {
   return (
     <nav className="pt-12 px-[4.5rem] flex items-center justify-between">
       <ul className="flex items-center gap-6">
-        <li>
-          <Link href="#" className="leading-[100%] font-semibold font-base">
-            Projects
-          </Link>
+        <li className="leading-[100%] font-semibold font-base">
+          <FlipLink href="#">Projects</FlipLink>
         </li>
-        <li>
-          <Link href="#" className="leading-[100%] font-semibold font-base">
-            Services
-          </Link>
+        <li className="leading-[100%] font-semibold font-base">
+          <FlipLink href="#">Services</FlipLink>
         </li>
-        <li>
-          <Link href="#" className="leading-[100%] font-semibold font-base">
-            Studio
-          </Link>
+        <li className="leading-[100%] font-semibold font-base">
+          <FlipLink href="#">Studio</FlipLink>
         </li>
-        <li>
-          <Link href="#" className="leading-[100%] font-semibold font-base">
-            Journal
-          </Link>
+        <li className="leading-[100%] font-semibold font-base">
+          <FlipLink href="#">Journal</FlipLink>
         </li>
       </ul>
 
-      <Link href="#" className="leading-[100%] font-semibold font-base">
-        Let's Talk
-      </Link>
+      <li className="leading-[100%] font-semibold font-base">
+        <FlipLink href="#">Let's Talk</FlipLink>
+      </li>
     </nav>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 import { COMPANIES, hero_banner } from "@/constants/images";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { RefObject, useContext, useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { TextReveal } from "@/components/common/text-reveal";
@@ -10,55 +10,40 @@ import {
   SmallerImageBottomUpReveal,
 } from "@/components/common/image-reveal";
 import { FlipLink } from "@/components/common/flip-link";
+import { useGSAPInit } from "@/hooks/useGsapInit";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = () => {
-  const containerRef = useRef(null);
-  const leftSideRef = useRef(null);
-  const imageRef = useRef(null);
-  const contentRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const leftSideRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
+  // Custom animations specific to this section
+  const customAnimations = [
+    () => {
+      if (imageRef.current && containerRef.current) {
+        gsap.to(imageRef.current, {
+          objectPosition: "85% center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
+      }
+    },
+  ];
 
-      gsap.to(imageRef.current, {
-        objectPosition: "85% center",
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "bottom bottom-=300",
-        end: "bottom top-=300",
-        pin: true,
-        pinSpacing: false,
-      });
-
-      gsap.to(containerRef.current, {
-        rotateX: "12deg",
-        scale: 0.92,
-        opacity: 0.8,
-        transformOrigin: "center bottom",
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "bottom bottom-=300",
-          end: "bottom bottom-=500",
-          scrub: true,
-        },
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Use our custom hook with explicit type
+  useGSAPInit(
+    containerRef as RefObject<HTMLElement>,
+    contentRef as RefObject<HTMLElement>,
+    customAnimations
+  );
 
   return (
     <section

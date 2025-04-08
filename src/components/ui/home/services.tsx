@@ -1,59 +1,23 @@
 "use client";
-import { useRef, useEffect, FC } from "react";
+import { useRef, FC, RefObject } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { SERVICES } from "@/constants/projects";
 import Image from "next/image";
 import { TextReveal } from "@/components/common/text-reveal";
 import { DiagonalReveal } from "@/components/common/image-reveal";
+import { useGSAPInit } from "@/hooks/useGsapInit";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Services = () => {
-  const sectionRef = useRef(null);
-  const contentRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(contentRef.current, {
-        rotateX: "0deg",
-        scale: 1,
-        opacity: 1,
-        y: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "top center",
-          scrub: true,
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "bottom bottom-=300",
-        end: "bottom top-=300",
-        pin: true,
-        pinSpacing: false,
-      });
-
-      gsap.to(sectionRef.current, {
-        rotateX: "12deg",
-        scale: 0.92,
-        opacity: 0.8,
-        transformOrigin: "center bottom",
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "bottom bottom-=300",
-          end: "bottom bottom-=500",
-          scrub: true,
-        },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  useGSAPInit(
+    sectionRef as RefObject<HTMLElement>,
+    contentRef as RefObject<HTMLElement>
+  );
 
   return (
     <section

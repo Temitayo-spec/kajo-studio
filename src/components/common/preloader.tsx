@@ -101,9 +101,6 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
             clipPath: "inset(100% 0% 0% 0%)",
             duration: 1,
             ease: "power2.inOut",
-            onComplete: () => {
-              onComplete();
-            },
           },
           0
         );
@@ -116,6 +113,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           onComplete: () => {
             const el = document.querySelector(".preloader-container");
             if (el) el.remove();
+            onComplete();
           },
         });
       });
@@ -148,7 +146,7 @@ export const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   }, []);
 
   return (
-    <div className="preloader-container flex items-center justify-center w-full h-screen bg-black text-white font-anton-sc uppercase relative overflow-hidden">
+    <div className="preloader-container flex items-center justify-center w-full h-screen bg-black text-white font-anton-sc uppercase fixed overflow-hidden">
       <div className="relative flex items-center justify-center w-full h-full">
         <div className="relative overflow-hidden h-100 w-100">
           {PRELOADER_IMAGES.map((image, index) => (

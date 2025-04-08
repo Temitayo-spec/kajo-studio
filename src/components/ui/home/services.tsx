@@ -79,6 +79,7 @@ const Services = () => {
                 direction="up"
                 duration={0.7}
                 stagger={0.08}
+                delay={0.2}
               >
                 (02)
               </TextReveal>
@@ -92,6 +93,7 @@ const Services = () => {
                 direction="up"
                 duration={0.7}
                 stagger={0.08}
+                delay={0.4}
               >
                 Services
               </TextReveal>

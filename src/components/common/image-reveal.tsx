@@ -21,7 +21,6 @@ const SmallerImageBottomUpReveal = ({
   duration = 1.2,
   viewport = { once: true, margin: "-10px" },
 }: RevealWrapperProps) => {
-  // Animate the content itself for small elements
   const contentVariants = {
     hidden: { y: 50, opacity: 0 },
     visible: {
@@ -56,7 +55,6 @@ const BottomUpReveal = ({
   duration = 1.2,
   viewport = { once: true, margin: "-100px 0px" },
 }: RevealWrapperProps) => {
-  // Animation for the image/content
   const contentVariants = {
     hidden: { scale: 1.1 },
     visible: {
@@ -69,7 +67,6 @@ const BottomUpReveal = ({
     },
   };
 
-  // Overlay reveal animation
   const revealVariants = {
     hidden: { y: "0%" },
     visible: {
@@ -111,10 +108,10 @@ const DiagonalReveal = ({
 }: RevealWrapperProps) => {
   const variants = {
     hidden: {
-      clipPath: "polygon(0 0, 0 0, 0 0, 0 0)", // Collapsed in the top-left corner
+      clipPath: "polygon(0 0, 0 0, 0 0, 0 0)",
     },
     visible: {
-      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", // Full rectangle
+      clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
       transition: {
         delay,
         duration,
@@ -124,7 +121,7 @@ const DiagonalReveal = ({
   };
 
   const contentVariants = {
-    hidden: { scale: 1.1 },
+    hidden: { scale: 1.5 },
     visible: {
       scale: 1,
       transition: {
@@ -147,56 +144,6 @@ const DiagonalReveal = ({
       <motion.div variants={contentVariants} className="relative h-full">
         {children}
       </motion.div>
-    </motion.div>
-  );
-};
-
-// Diagonal Swipe Reveal Wrapper with overlay
-const SwipeReveal = ({
-  children,
-  className = "",
-  delay = 0,
-  duration = 1.2,
-  viewport = { once: true, margin: "-100px 0px" },
-}: RevealWrapperProps) => {
-  // Container and overlay animation variants
-  const containerVariants = {
-    hidden: { opacity: 1 },
-    visible: { opacity: 1 },
-  };
-
-  // Overlay variants for diagonal swipe effect
-  const overlayVariants = {
-    hidden: {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    },
-    visible: {
-      clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
-      transition: {
-        delay,
-        duration,
-        ease: [0.76, 0, 0.24, 1],
-      },
-    },
-  };
-
-  return (
-    <motion.div
-      className={`relative ${className}`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={viewport}
-      variants={containerVariants}
-    >
-      {/* The actual content (image or any other element) */}
-      {children}
-
-      {/* Diagonal swipe overlay */}
-      <motion.div
-        className="absolute inset-0 bg-black z-10"
-        variants={overlayVariants}
-        style={{ transformOrigin: "center right", willChange: "clip-path" }}
-      />
     </motion.div>
   );
 };
@@ -293,7 +240,6 @@ const ClipPathReveal = ({
 export {
   BottomUpReveal,
   DiagonalReveal,
-  SwipeReveal,
   ClipPathReveal,
   SmallerImageBottomUpReveal,
 };

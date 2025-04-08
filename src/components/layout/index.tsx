@@ -1,7 +1,7 @@
 "use client";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { FC, ReactNode, useState, useContext, createContext } from "react";
+import { FC, ReactNode, useState, createContext } from "react";
 import { Preloader } from "../common/preloader";
 import { motion } from "framer-motion";
 

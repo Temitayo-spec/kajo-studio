@@ -6,7 +6,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type AnimationFunction = () => void;
+// type AnimationFunction = () => void;
 
 export const useGSAPInit = (
 //   sectionRef: RefObject<HTMLElement>,

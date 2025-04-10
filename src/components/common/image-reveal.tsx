@@ -148,7 +148,7 @@ const DiagonalReveal = ({
   );
 };
 
-// Customizable ClipPath Reveal Wrapper
+// ClipPath Reveal Wrapper
 interface ClipPathRevealProps extends RevealWrapperProps {
   initialClipPath?: string;
   finalClipPath?: string;

@@ -29,7 +29,6 @@ const ClipPathTextReveal: React.FC<ClipPathTextRevealProps> = ({
   splitType = "words",
   viewport = { once: true, margin: "-100px 0px" },
 }) => {
-  // Get clip-path variants based on direction
   const getClipPathVariants = (): Variants => {
     let initialClipPath: string;
 
@@ -62,7 +61,7 @@ const ClipPathTextReveal: React.FC<ClipPathTextRevealProps> = ({
           clipPath: {
             duration,
             delay: delay + stagger * i,
-            ease: [0.77, 0, 0.175, 1], // Custom ease for smooth reveal
+            ease: [0.77, 0, 0.175, 1],
           },
           opacity: {
             duration: duration * 0.5,
@@ -73,7 +72,6 @@ const ClipPathTextReveal: React.FC<ClipPathTextRevealProps> = ({
     };
   };
 
-  // Split text based on splitType
   const renderContent = () => {
     if (splitType === "none") {
       return (
@@ -90,12 +88,10 @@ const ClipPathTextReveal: React.FC<ClipPathTextRevealProps> = ({
       );
     }
 
-    // Handle unexpected non-string children
     if (typeof children !== "string") {
       return <span>{children}</span>;
     }
 
-    // Split based on type
     if (splitType === "chars") {
       return (
         <motion.div
@@ -165,7 +161,6 @@ const ClipPathTextReveal: React.FC<ClipPathTextRevealProps> = ({
       );
     }
 
-    // Fallback
     return <span>{children}</span>;
   };
 
@@ -199,7 +194,6 @@ const TextReveal: React.FC<TextRevealProps> = ({
   splitType = "words",
   viewport = { once: true, margin: "-10% 0px" },
 }) => {
-  // Get animation variants based on direction
   const getVariants = (): Variants => {
     const initialProps = {
       y: direction === "up" ? "100%" : direction === "down" ? "-100%" : "0%",
@@ -222,7 +216,6 @@ const TextReveal: React.FC<TextRevealProps> = ({
     };
   };
 
-  // Split text based on splitType with container wrappers
   const renderContent = () => {
     if (splitType === "none") {
       return (
@@ -240,12 +233,10 @@ const TextReveal: React.FC<TextRevealProps> = ({
       );
     }
 
-    // Handle unexpected non-string children
     if (typeof children !== "string") {
       return <span>{children}</span>;
     }
 
-    // Split based on type
     if (splitType === "chars") {
       return (
         <motion.span
@@ -319,7 +310,6 @@ const TextReveal: React.FC<TextRevealProps> = ({
       );
     }
 
-    // Fallback
     return <span>{children}</span>;
   };
 

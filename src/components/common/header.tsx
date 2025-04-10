@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "@/svgs/logo.svg";
 import { FlipLink } from "./flip-link";
 import { useTransitionRouter } from "next-view-transitions";
+import Link from "next/link";
 
 const Header = () => {
   const router = useTransitionRouter();
@@ -48,7 +49,7 @@ const Header = () => {
   return (
     <nav className="py-12">
       <div className="w-[90%] max-w-[1440px] mx-auto flex items-center justify-between">
-        <a
+        <Link
           href="/"
           onClick={(e) => {
             e.preventDefault();
@@ -58,7 +59,7 @@ const Header = () => {
           }}
         >
           <Image src={logo} alt="kajo logo" />
-        </a>
+        </Link>
 
         <ul className="flex items-center gap-6">
           <li className="leading-[100%] font-semibold font-base">
@@ -66,7 +67,7 @@ const Header = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/", {
+                router.push("#", {
                   onTransitionReady: slideInOut,
                 });
               }}
@@ -79,7 +80,7 @@ const Header = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/", {
+                router.push("#", {
                   onTransitionReady: slideInOut,
                 });
               }}
@@ -105,7 +106,7 @@ const Header = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                router.push("/", {
+                router.push("#", {
                   onTransitionReady: slideInOut,
                 });
               }}
@@ -120,7 +121,7 @@ const Header = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              router.push("/", {
+              router.push("#", {
                 onTransitionReady: slideInOut,
               });
             }}

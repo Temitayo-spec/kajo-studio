@@ -24,7 +24,7 @@ export const FlipLink = ({
 }: {
   children: string;
   href: string;
-  onClick?: (e: any) => void;
+  onClick?: (e: { preventDefault: () => void }) => void;
 }) => {
   return (
     <a href={href} onClick={onClick}>

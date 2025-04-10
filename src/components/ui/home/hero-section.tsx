@@ -106,6 +106,7 @@ const HeroSection = () => {
                 direction="up"
                 duration={0.7}
                 stagger={0.08}
+                delay={1.5}
               >
                 ©kajo
               </TextReveal>
@@ -114,7 +115,7 @@ const HeroSection = () => {
                 splitType="chars"
                 direction="up"
                 duration={0.7}
-                delay={0.2}
+                delay={1.7}
                 stagger={0.08}
               >
                 studio
@@ -127,7 +128,7 @@ const HeroSection = () => {
                 direction="up"
                 duration={0.7}
                 stagger={0.08}
-                delay={1.2}
+                delay={1.9}
               >
                 Crafting impactful brands and
               </TextReveal>
@@ -135,7 +136,7 @@ const HeroSection = () => {
                 splitType="lines"
                 direction="up"
                 duration={0.7}
-                delay={1.4}
+                delay={2.1}
                 stagger={0.08}
               >
                 websites that drive growth and
@@ -144,7 +145,7 @@ const HeroSection = () => {
                 splitType="lines"
                 direction="up"
                 duration={0.7}
-                delay={1.6}
+                delay={2.3}
                 stagger={0.08}
               >
                 success.

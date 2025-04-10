@@ -74,6 +74,7 @@ const HeroSection = () => {
             direction="up"
             duration={0.7}
             stagger={0.08}
+            delay={1.6}
           >
             Ahoj Kajo
           </TextReveal>
@@ -88,7 +89,7 @@ const HeroSection = () => {
               direction="up"
               duration={0.7}
               stagger={0.08}
-              delay={i * 0.05}
+              delay={i === 0 ? 1.8 : i * 0.05 + 1.9}
               key={i}
             >
               {lines}

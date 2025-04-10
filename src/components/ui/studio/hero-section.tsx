@@ -16,10 +16,9 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (!isLoading && animationComplete) {
-      // Note: This should probably be if (!isLoading && animationComplete)
       initializeGSAP();
     }
-  }, []);
+  }, [isLoading, animationComplete]);
 
   const initializeGSAP = () => {
     const ctx = gsap.context(() => {

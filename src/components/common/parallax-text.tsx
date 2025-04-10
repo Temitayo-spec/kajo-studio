@@ -71,7 +71,7 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
 
 export default function ParallaxMarquee() {
   return (
-    <section className="flex w-1/2 sticky top-0">
+    <section className="flex w-full h-screen">
       <ParallaxText baseVelocity={2}>
         {CART_ONE.map((item, index) => (
           <Image key={index} src={item} alt="" />

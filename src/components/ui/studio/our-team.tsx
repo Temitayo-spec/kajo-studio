@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const OurTeam = () => {
   const sectionRef = useRef(null);
-  const contentRef = useRef(null);
   const { isLoading, animationComplete } = useContext(LoadingContext);
 
   useEffect(() => {
@@ -29,20 +28,6 @@ const OurTeam = () => {
       ScrollTrigger.refresh();
 
       setTimeout(() => {
-        gsap.to(contentRef.current, {
-          rotateX: "0deg",
-          scale: 1,
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "top center",
-            scrub: true,
-          },
-        });
-
         ScrollTrigger.create({
           trigger: sectionRef.current,
           start: "bottom bottom-=300",
@@ -81,7 +66,7 @@ const OurTeam = () => {
       ref={sectionRef}
       className="bg-inverse-1 min-h-screen perspective-section relative z-20"
     >
-      <main ref={contentRef} className="transform-container">
+      <main>
         <header className="w-[90%] mx-auto max-w-[1440px] pt-[6rem] space-y-[6rem]">
           <div className="flex items-center justify-between">
             <p className="font-gambetta text-2xl text-white/60">

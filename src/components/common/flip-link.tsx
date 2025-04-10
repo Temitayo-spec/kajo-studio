@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -17,9 +17,17 @@ import Link from "next/link";
 const DURATION = 0.25;
 const STAGGER = 0.025;
 
-export const FlipLink = ({ children, href }: { children: string; href: string }) => {
+export const FlipLink = ({
+  children,
+  href,
+  onClick,
+}: {
+  children: string;
+  href: string;
+  onClick?: (e: any) => void;
+}) => {
   return (
-    <Link href={href}>
+    <a href={href} onClick={onClick}>
       <motion.span
         initial="initial"
         whileHover="hovered"
@@ -75,6 +83,6 @@ export const FlipLink = ({ children, href }: { children: string; href: string })
           ))}
         </div>
       </motion.span>
-    </Link>
+    </a>
   );
 };

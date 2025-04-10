@@ -2,6 +2,7 @@ import { Anton_SC, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Layout from "@/components/layout";
+import { ViewTransitions } from "next-view-transitions";
 
 const anton_sc = Anton_SC({
   variable: "--font-anton-sc",
@@ -31,12 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${anton_sc.variable} ${montserrat.className} ${gambetta.variable} antialiased`}
-      >
-        <Layout>{children}</Layout>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`${anton_sc.variable} ${montserrat.className} ${gambetta.variable} antialiased`}
+        >
+          <Layout>{children}</Layout>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

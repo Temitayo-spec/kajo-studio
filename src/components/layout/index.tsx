@@ -34,9 +34,9 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
     <LoadingContext.Provider value={{ isLoading, animationComplete }}>
       <main className="bg-background min-h-screen">
         <ReactLenis root>
-          {/* <Preloader onComplete={() => setIsLoading(false)} /> */}
-          {/* <AnimatePresence mode="wait">
-            {!isLoading && ( */}
+          <Preloader onComplete={() => setIsLoading(false)} />
+          <AnimatePresence mode="wait">
+            {!isLoading && (
               <motion.div
                 key="content"
                 variants={contentVariants}
@@ -45,8 +45,8 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
               >
                 {children}
               </motion.div>
-            {/* )}
-          </AnimatePresence> */}
+            )}
+          </AnimatePresence>
         </ReactLenis>
       </main>
     </LoadingContext.Provider>

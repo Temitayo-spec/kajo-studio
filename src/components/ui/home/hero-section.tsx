@@ -11,6 +11,7 @@ import {
 } from "@/components/common/image-reveal";
 import { FlipLink } from "@/components/common/flip-link";
 import { LoadingContext } from "@/components/layout";
+import { useTransitionRouter } from "next-view-transitions";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -181,7 +182,6 @@ const HeroSection = () => {
                 >
                   Powerful Websites
                 </TextReveal>
-                {/* <span>Creative Brands,</span> <span>Powerful Websites</span> */}
               </h2>
 
               <p className="flex flex-col gap-8 text-xl text-white/60 font-normal leading-[170%]">
@@ -208,20 +208,6 @@ const HeroSection = () => {
                     </TextReveal>
                   ))}
                 </span>
-                {/* <TextReveal
-                  splitType="lines"
-                  direction="up"
-                  duration={0.7}
-                  stagger={0.08}
-                >
-                  We are passionate about creating meaningful brands and dynamic
-                  websites that stand out in today's competitive market. Our
-                  team combines strategic thinking with creative design to craft
-                  custom solutions that align with your business goals. From
-                  developing a unique brand identity to designing intuitive,
-                  responsive websites, we focus on delivering experiences that
-                  engage and convert.
-                </TextReveal> */}
                 <span>
                   {[
                     "With every project, we ensure that your brand's story",
@@ -242,18 +228,6 @@ const HeroSection = () => {
                     </TextReveal>
                   ))}
                 </span>
-                {/* <TextReveal
-                  splitType="lines"
-                  direction="up"
-                  duration={0.7}
-                  stagger={0.08}
-                  delay={0.2}
-                >
-                  With every project, we ensure that your brand's story is told
-                  in a way that resonates with your audience, builds trust, and
-                  drives growth. Let us help you transform your brand and take
-                  your digital presence to the next level.
-                </TextReveal> */}
               </p>
             </div>
 
@@ -296,25 +270,115 @@ const HeroSection = () => {
 export default HeroSection;
 
 const Navbar = () => {
+  const router = useTransitionRouter();
+
+  function slideInOut() {
+    document.documentElement.animate(
+      [
+        {
+          opacity: 1,
+          transform: "translateY(0)",
+        },
+        {
+          opacity: 0.2,
+          transform: "translateY(-35%)",
+        },
+      ],
+      {
+        duration: 1500,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
+      }
+    );
+
+    document.documentElement.animate(
+      [
+        {
+          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
+        },
+        {
+          clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0% 0%)",
+        },
+      ],
+      {
+        duration: 1500,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }
+
   return (
     <nav className="pt-12 px-[4.5rem] flex items-center justify-between">
       <ul className="flex items-center gap-6">
         <li className="leading-[100%] font-semibold font-base">
-          <FlipLink href="#">Projects</FlipLink>
+          <FlipLink
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/", {
+                onTransitionReady: slideInOut,
+              });
+            }}
+          >
+            Projects
+          </FlipLink>
         </li>
         <li className="leading-[100%] font-semibold font-base">
-          <FlipLink href="#">Services</FlipLink>
+          <FlipLink
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/", {
+                onTransitionReady: slideInOut,
+              });
+            }}
+            href="/"
+          >
+            Services
+          </FlipLink>
         </li>
         <li className="leading-[100%] font-semibold font-base">
-          <FlipLink href="/studio">Studio</FlipLink>
+          <FlipLink
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/studio", {
+                onTransitionReady: slideInOut,
+              });
+            }}
+            href="/studio"
+          >
+            Studio
+          </FlipLink>
         </li>
         <li className="leading-[100%] font-semibold font-base">
-          <FlipLink href="#">Journal</FlipLink>
+          <FlipLink
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/", {
+                onTransitionReady: slideInOut,
+              });
+            }}
+            href="/"
+          >
+            Journal
+          </FlipLink>
         </li>
       </ul>
 
       <li className="leading-[100%] font-semibold font-base list-none">
-        <FlipLink href="#">Contact</FlipLink>
+        <FlipLink
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/", {
+              onTransitionReady: slideInOut,
+            });
+          }}
+          href="/"
+        >
+          Contact
+        </FlipLink>
       </li>
     </nav>
   );

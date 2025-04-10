@@ -32,7 +32,7 @@ interface IOurTeam {
   image: StaticImageData;
   description: string;
   socials: {
-    icon: any;
+    icon: StaticImageData;
     link: string;
   }[];
 }

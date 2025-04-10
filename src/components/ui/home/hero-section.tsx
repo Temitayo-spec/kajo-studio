@@ -306,7 +306,7 @@ const Navbar = () => {
           <FlipLink href="#">Services</FlipLink>
         </li>
         <li className="leading-[100%] font-semibold font-base">
-          <FlipLink href="#">Studio</FlipLink>
+          <FlipLink href="/studio">Studio</FlipLink>
         </li>
         <li className="leading-[100%] font-semibold font-base">
           <FlipLink href="#">Journal</FlipLink>

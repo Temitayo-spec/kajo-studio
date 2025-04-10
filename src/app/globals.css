@@ -11,7 +11,7 @@
   --color-background: var(--background);
   --color-inverse-1: var(--background-inverse-1);
   --color-inverse-2: var(--background-inverse-2);
-  --color-footer-links: #0E101199;
+  --color-footer-links: #0e101199;
   /* --color-foreground: var(--foreground); */
   --font-anton-sc: var(--font-anton-sc);
   --font-gambetta: var(--font-gambetta);
@@ -49,4 +49,23 @@ span {
 .transform-container {
   transform-style: preserve-3d;
   will-change: transform, opacity;
+}
+
+.parallax-vertical {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.scroller-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scroller-vertical span {
+  padding: 0rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

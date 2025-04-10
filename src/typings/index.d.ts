@@ -25,3 +25,22 @@ interface ITestimonials {
 interface ProjectCardProps extends IProjects {
   index: number;
 }
+
+interface IOurTeam {
+  role: string;
+  name: string[];
+  image: StaticImageData;
+  description: string;
+  socials: {
+    icon: any;
+    link: string;
+  }[];
+}
+
+interface IAwards {
+  title: string[];
+  award: {
+    title: string;
+    year: string;
+  }[];
+}

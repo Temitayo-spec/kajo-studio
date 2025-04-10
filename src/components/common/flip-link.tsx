@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 

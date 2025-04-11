@@ -1,17 +1,17 @@
 "use client";
 import { COMPANIES, hero_banner } from "@/constants/images";
 import Image from "next/image";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { TextReveal } from "@/components/common/text-reveal";
 import {
   DiagonalReveal,
   SmallerImageBottomUpReveal,
 } from "@/components/common/image-reveal";
-import { FlipLink } from "@/components/common/flip-link";
 import { LoadingContext } from "@/components/layout";
-import { useTransitionRouter } from "next-view-transitions";
+import Navigation from "@/components/common/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,61 +22,59 @@ const HeroSection = () => {
   const contentRef = useRef(null);
   const { isLoading, animationComplete } = useContext(LoadingContext);
 
-  useEffect(() => {
-    if (!isLoading && animationComplete) {
-      initializeGSAP();
-    }
-  }, [isLoading, animationComplete]);
+  useGSAP(
+    () => {
+      if (!isLoading && animationComplete) {
+        ScrollTrigger.getAll().forEach((st) => st.kill());
+        ScrollTrigger.refresh();
 
-  const initializeGSAP = () => {
-    const ctx = gsap.context(() => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-      ScrollTrigger.refresh();
+        setTimeout(() => {
+          gsap.to(imageRef.current, {
+            objectPosition: "85% center",
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          });
 
-      setTimeout(() => {
-        gsap.to(imageRef.current, {
-          objectPosition: "85% center",
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        });
-
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "bottom bottom-=300",
-          end: "bottom top-=300",
-          pin: true,
-          pinSpacing: false,
-          id: "hero-pin",
-        });
-
-        gsap.to(containerRef.current, {
-          rotateX: "12deg",
-          scale: 0.92,
-          opacity: 0.8,
-          transformOrigin: "center bottom",
-          ease: "power2.inOut",
-          scrollTrigger: {
+          ScrollTrigger.create({
             trigger: containerRef.current,
             start: "bottom bottom-=300",
-            end: "bottom bottom-=500",
-            scrub: true,
-          },
-        });
-      }, 100);
-    }, containerRef);
+            end: "bottom top-=300",
+            pin: true,
+            pinSpacing: false,
+            id: "hero-pin",
+          });
 
-    return () => ctx.revert();
-  };
+          gsap.to(containerRef.current, {
+            rotateX: "12deg",
+            scale: 0.92,
+            opacity: 0.8,
+            transformOrigin: "center bottom",
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "bottom bottom-=300",
+              end: "bottom bottom-=500",
+              scrub: true,
+            },
+          });
+        }, 100);
+      }
+    },
+    {
+      dependencies: [isLoading, animationComplete],
+      scope: containerRef,
+    }
+  );
 
   return (
     <section
       ref={containerRef}
-      className="max-w-[1440px] mx-auto flex min-h-screen relative"
+      className="max-w-[1440px] mx-auto flex min-h-screen"
     >
       <div ref={leftSideRef} className="h-screen w-1/2 sticky top-0">
         <DiagonalReveal className="h-full" delay={1.5} duration={2}>
@@ -97,7 +95,7 @@ const HeroSection = () => {
 
       <div className="w-1/2 flex-1">
         <div ref={contentRef} className="transform-container">
-          <Navbar />
+          <Navigation isHomePage={true} />
 
           <div className="px-[4.5rem] pt-[4.37rem] pb-12">
             <h1 className="font-anton-sc text-[10rem] uppercase flex flex-col leading-[100%]">
@@ -269,118 +267,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
-const Navbar = () => {
-  const router = useTransitionRouter();
-
-  function slideInOut() {
-    document.documentElement.animate(
-      [
-        {
-          opacity: 1,
-          transform: "translateY(0)",
-        },
-        {
-          opacity: 0.2,
-          transform: "translateY(-35%)",
-        },
-      ],
-      {
-        duration: 1500,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-old(root)",
-      }
-    );
-
-    document.documentElement.animate(
-      [
-        {
-          clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-        },
-        {
-          clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0% 0%)",
-        },
-      ],
-      {
-        duration: 1500,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-new(root)",
-      }
-    );
-  }
-
-  return (
-    <nav className="pt-12 px-[4.5rem] flex items-center justify-between">
-      <ul className="flex items-center gap-6">
-        <li className="leading-[100%] font-semibold font-base">
-          <FlipLink
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/", {
-                onTransitionReady: slideInOut,
-              });
-            }}
-          >
-            Projects
-          </FlipLink>
-        </li>
-        <li className="leading-[100%] font-semibold font-base">
-          <FlipLink
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/", {
-                onTransitionReady: slideInOut,
-              });
-            }}
-            href="/"
-          >
-            Services
-          </FlipLink>
-        </li>
-        <li className="leading-[100%] font-semibold font-base">
-          <FlipLink
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/studio", {
-                onTransitionReady: slideInOut,
-              });
-            }}
-            href="/studio"
-          >
-            Studio
-          </FlipLink>
-        </li>
-        <li className="leading-[100%] font-semibold font-base">
-          <FlipLink
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/", {
-                onTransitionReady: slideInOut,
-              });
-            }}
-            href="/"
-          >
-            Journal
-          </FlipLink>
-        </li>
-      </ul>
-
-      <li className="leading-[100%] font-semibold font-base list-none">
-        <FlipLink
-          onClick={(e) => {
-            e.preventDefault();
-            router.push("/", {
-              onTransitionReady: slideInOut,
-            });
-          }}
-          href="/"
-        >
-          Contact
-        </FlipLink>
-      </li>
-    </nav>
-  );
-};

@@ -20,7 +20,7 @@ const gambetta = localFont({
   ],
   variable: "--font-gambetta",
 });
-``
+
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],

@@ -4,7 +4,7 @@ import logo from "@/svgs/logo.svg";
 import { FlipLink } from "./flip-link";
 import { useTransitionRouter } from "next-view-transitions";
 import Link from "next/link";
-import { pageAnimation, pageAnimationTwo } from "@/helpers/animation";
+import { pageAnimation } from "@/helpers/animation";
 
 const Navigation = ({ isHomePage = false }) => {
   const router = useTransitionRouter();
@@ -23,7 +23,7 @@ const Navigation = ({ isHomePage = false }) => {
         onClick={(e) => {
           e.preventDefault();
           router.push(item.href, {
-            onTransitionReady: pageAnimationTwo,
+            onTransitionReady: pageAnimation,
           });
         }}
       >
@@ -66,7 +66,7 @@ const Navigation = ({ isHomePage = false }) => {
           onClick={(e) => {
             e.preventDefault();
             router.push("/", {
-              onTransitionReady: pageAnimationTwo,
+              onTransitionReady: pageAnimation,
             });
           }}
         >
